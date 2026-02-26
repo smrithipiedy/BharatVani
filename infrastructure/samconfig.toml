@@ -1,0 +1,11 @@
+version = 0.1
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "bharatvani-stack"
+resolve_s3 = true
+s3_prefix = "bharatvani"
+region = "ap-south-1"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM CAPABILITY_NAMED_IAM"
+parameter_overrides = "Environment=dev"
+tags = "Project=BharatVani"

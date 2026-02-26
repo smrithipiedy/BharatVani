@@ -1,0 +1,52 @@
+{
+  "id": "pm_kisan",
+  "name": "PM-KISAN",
+  "full_name": "Pradhan Mantri Kisan Samman Nidhi",
+  "hindi_name": "प्रधानमंत्री किसान सम्मान निधि",
+  "category": "agriculture",
+  "benefit": "₹6,000 per year in 3 installments of ₹2,000 each",
+  "benefit_hindi": "हर साल ₹6,000, तीन किस्तों में ₹2,000-₹2,000",
+  "eligibility": {
+    "description": "All landholding farmer families with cultivable land",
+    "description_hindi": "खेती की ज़मीन वाले सभी किसान परिवार",
+    "criteria": [
+      "Must own cultivable agricultural land",
+      "No land size restriction (since Feb 2019)",
+      "Family includes husband, wife, and minor children"
+    ],
+    "exclusions": [
+      "Institutional land holders",
+      "Farmer families with government jobs",
+      "Income tax payers",
+      "Professionals like doctors, engineers, lawyers, CAs"
+    ]
+  },
+  "documents_required": [
+    "Aadhaar Card",
+    "Land ownership papers (Khatauni/Khasra)",
+    "Bank account (linked to Aadhaar)",
+    "Mobile number"
+  ],
+  "how_to_apply": {
+    "steps": [
+      "Visit nearest CSC (Common Service Centre)",
+      "Or go to pmkisan.gov.in",
+      "Or contact local Patwari/Revenue officer",
+      "Submit Aadhaar, land papers, and bank details",
+      "Verification by state government",
+      "Amount credited directly to bank account"
+    ],
+    "steps_hindi": [
+      "Nearest CSC center jaayein",
+      "Ya pmkisan.gov.in par apply karein",
+      "Ya local Patwari se sampark karein",
+      "Aadhaar, zameen ke papers, aur bank details dein",
+      "State government verify karegi",
+      "Paisa seedha bank account mein aayega"
+    ]
+  },
+  "helpline": "155261 / 011-24300606",
+  "website": "pmkisan.gov.in",
+  "status_check": "pmkisan.gov.in/BeneficiaryStatus",
+  "hindi_summary": "PM-KISAN mein har kisan ko saal mein 6000 rupaye milte hain. Ye paisa teen installment mein aata hai — 2000-2000 rupaye. Iske liye Aadhaar card, zameen ke papers, aur bank account chahiye. Apply karne ke liye nearest CSC center jaayein ya pmkisan.gov.in par jayein."
+}

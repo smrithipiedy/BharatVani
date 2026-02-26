@@ -1,0 +1,187 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  BharatVani - Voice-First Digital Access Platform for India
+  Toll-free AI voice service powered by AWS
+
+Globals:
+  Function:
+    Timeout: 30
+    Runtime: nodejs18.x
+    MemorySize: 256
+    Environment:
+      Variables:
+        AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1'
+
+Parameters:
+  Environment:
+    Type: String
+    Default: dev
+    AllowedValues: [dev, prod]
+  BedrockModelId:
+    Type: String
+    Default: anthropic.claude-3-5-sonnet-20241022-v2:0
+
+Resources:
+
+  # ========================================
+  # DynamoDB Tables
+  # ========================================
+
+  SessionsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub 'BharatVani-Sessions-${Environment}'
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: session_id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: session_id
+          KeyType: HASH
+      TimeToLiveSpecification:
+        AttributeName: ttl
+        Enabled: true
+      Tags:
+        - Key: Project
+          Value: BharatVani
+
+  UsersTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub 'BharatVani-Users-${Environment}'
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: phone_number
+          AttributeType: S
+      KeySchema:
+        - AttributeName: phone_number
+          KeyType: HASH
+      Tags:
+        - Key: Project
+          Value: BharatVani
+
+  QueryLogsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub 'BharatVani-QueryLogs-${Environment}'
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: query_id
+          AttributeType: S
+        - AttributeName: timestamp
+          AttributeType: S
+      KeySchema:
+        - AttributeName: query_id
+          KeyType: HASH
+        - AttributeName: timestamp
+          KeyType: RANGE
+      TimeToLiveSpecification:
+        AttributeName: ttl
+        Enabled: true
+      Tags:
+        - Key: Project
+          Value: BharatVani
+
+  # ========================================
+  # S3 Bucket for Knowledge Base
+  # ========================================
+
+  KnowledgeBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub 'bharatvani-kb-${AWS::AccountId}-${Environment}'
+      VersioningConfiguration:
+        Status: Enabled
+      Tags:
+        - Key: Project
+          Value: BharatVani
+
+  # ========================================
+  # Lambda Function — The Orchestrator
+  # ========================================
+
+  OrchestratorFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub 'BharatVani-Orchestrator-${Environment}'
+      CodeUri: lambda/orchestrator/
+      Handler: index.handler
+      Description: BharatVani main orchestrator — handles voice AI pipeline
+      Environment:
+        Variables:
+          SESSIONS_TABLE: !Ref SessionsTable
+          USERS_TABLE: !Ref UsersTable
+          QUERY_LOGS_TABLE: !Ref QueryLogsTable
+          KB_BUCKET: !Ref KnowledgeBucket
+          BEDROCK_MODEL_ID: !Ref BedrockModelId
+          ENVIRONMENT: !Ref Environment
+      Policies:
+        # DynamoDB access
+        - DynamoDBCrudPolicy:
+            TableName: !Ref SessionsTable
+        - DynamoDBCrudPolicy:
+            TableName: !Ref UsersTable
+        - DynamoDBCrudPolicy:
+            TableName: !Ref QueryLogsTable
+        # S3 read access
+        - S3ReadPolicy:
+            BucketName: !Ref KnowledgeBucket
+        # Bedrock access
+        - Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - bedrock:InvokeModel
+                - bedrock:InvokeModelWithResponseStream
+              Resource: !Sub 'arn:aws:bedrock:${AWS::Region}::foundation-model/*'
+        # SNS for SMS
+        - Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - sns:Publish
+              Resource: '*'
+        # Polly for TTS (used by Connect)
+        - Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - polly:SynthesizeSpeech
+              Resource: '*'
+      Tags:
+        Project: BharatVani
+
+  # Lambda permission for Amazon Connect
+  ConnectLambdaPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref OrchestratorFunction
+      Action: lambda:InvokeFunction
+      Principal: connect.amazonaws.com
+      SourceAccount: !Ref AWS::AccountId
+
+# ========================================
+# Outputs
+# ========================================
+
+Outputs:
+  OrchestratorFunctionArn:
+    Description: Orchestrator Lambda ARN (use this in Connect)
+    Value: !GetAtt OrchestratorFunction.Arn
+
+  SessionsTableName:
+    Description: DynamoDB Sessions table name
+    Value: !Ref SessionsTable
+
+  UsersTableName:
+    Description: DynamoDB Users table name
+    Value: !Ref UsersTable
+
+  KnowledgeBucketName:
+    Description: S3 Knowledge Base bucket
+    Value: !Ref KnowledgeBucket
+
+  DeploymentRegion:
+    Description: AWS Region
+    Value: !Ref AWS::Region

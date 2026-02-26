@@ -1,0 +1,20 @@
+{
+    "name": "bharatvani-orchestrator",
+    "version": "1.0.0",
+    "description": "BharatVani Voice AI Orchestrator — Lambda function",
+    "type": "module",
+    "main": "index.mjs",
+    "scripts": {
+        "test": "node ../../scripts/test-local.mjs"
+    },
+    "dependencies": {
+        "@aws-sdk/client-bedrock-runtime": "^3.500.0",
+        "@aws-sdk/client-dynamodb": "^3.500.0",
+        "@aws-sdk/lib-dynamodb": "^3.500.0",
+        "@aws-sdk/client-sns": "^3.500.0",
+        "@aws-sdk/client-s3": "^3.500.0"
+    },
+    "engines": {
+        "node": ">=18.0.0"
+    }
+}

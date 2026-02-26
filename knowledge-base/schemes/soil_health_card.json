@@ -1,0 +1,46 @@
+{
+    "id": "soil_health_card",
+    "name": "Soil Health Card Scheme",
+    "full_name": "Soil Health Card Scheme",
+    "hindi_name": "मृदा स्वास्थ्य कार्ड योजना",
+    "category": "agriculture",
+    "benefit": "Free soil testing + crop-wise fertilizer recommendation",
+    "benefit_hindi": "Free mitti ki jaanch + fasal ke hisaab se khad ki salaah",
+    "eligibility": {
+        "description": "All farmers across India",
+        "description_hindi": "Bharat ke sabhi kisan",
+        "criteria": [
+            "Any farmer with agricultural land",
+            "No restrictions on land size",
+            "Card issued once every 2 years",
+            "Available in all states"
+        ],
+        "exclusions": []
+    },
+    "documents_required": [
+        "Aadhaar Card",
+        "Land details (khasra number)",
+        "No formal application needed — government collects samples"
+    ],
+    "how_to_apply": {
+        "steps": [
+            "Contact your local Krishi Vigyan Kendra (KVK)",
+            "or visit Block Agriculture Office",
+            "Government officials collect soil samples from your field",
+            "Testing done in soil testing labs",
+            "Soil Health Card delivered with recommendations",
+            "Follow fertilizer recommendations to save money and improve yield"
+        ],
+        "steps_hindi": [
+            "Local Krishi Vigyan Kendra se sampark karein",
+            "Ya Block Agriculture Office jaayein",
+            "Government ki team aapke khet se mitti ka sample legi",
+            "Lab mein testing hogi",
+            "Soil Health Card milega jismein salaah likhi hogi",
+            "Card ke hisaab se khad dalein — paisa bachega aur fasal acchi hogi"
+        ]
+    },
+    "helpline": "1800-180-1551",
+    "website": "soilhealth.dac.gov.in",
+    "hindi_summary": "Soil Health Card mein aapki mitti ki free jaanch hoti hai. Card mein likha hota hai ki kaunsi fasal ke liye kitni aur kaunsi khad daalni chahiye. Isse fasal acchi hoti hai aur khad ka kharcha kam hota hai. Local agriculture office se sampark karein."
+}

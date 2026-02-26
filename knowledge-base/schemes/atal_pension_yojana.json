@@ -1,0 +1,66 @@
+{
+    "id": "atal_pension_yojana",
+    "name": "Atal Pension Yojana",
+    "full_name": "Atal Pension Yojana",
+    "hindi_name": "अटल पेंशन योजना",
+    "category": "pension",
+    "benefit": "Guaranteed pension of ₹1,000 to ₹5,000 per month after age 60",
+    "benefit_hindi": "60 saal ki umar ke baad har mahine ₹1,000 se ₹5,000 pension",
+    "eligibility": {
+        "description": "Indian citizens aged 18-40 years with a bank account",
+        "description_hindi": "18 se 40 saal ke Bharatiya naagrik jinka bank account hai",
+        "criteria": [
+            "Age between 18 and 40 years",
+            "Must have a savings bank account",
+            "Must have Aadhaar and mobile number linked to bank",
+            "Not a government employee",
+            "Not an income tax payer"
+        ],
+        "exclusions": [
+            "Below 18 or above 40 years",
+            "Government employees",
+            "Income tax payers",
+            "Existing EPF/EPS members (generally)"
+        ]
+    },
+    "documents_required": [
+        "Aadhaar Card",
+        "Bank account (savings)",
+        "Mobile number linked to bank"
+    ],
+    "how_to_apply": {
+        "steps": [
+            "Visit your bank where you have savings account",
+            "Fill APY registration form",
+            "Choose pension amount: ₹1,000 / ₹2,000 / ₹3,000 / ₹4,000 / ₹5,000 per month",
+            "Monthly contribution auto-debited from bank account",
+            "Contribution depends on age and pension amount chosen",
+            "Pension starts at age 60"
+        ],
+        "steps_hindi": [
+            "Apne bank mein jaayein jahan savings account hai",
+            "APY registration form bharein",
+            "Pension chunein: ₹1,000 / ₹2,000 / ₹3,000 / ₹4,000 / ₹5,000 mahina",
+            "Har mahine bank se paisa automatic kat jayega",
+            "Kitna katega ye aapki umar aur pension par depend karta hai",
+            "60 saal ki umar se pension milna shuru hoga"
+        ]
+    },
+    "helpline": "1800-889-1030",
+    "website": "npscra.nsdl.co.in",
+    "monthly_contribution_examples": {
+        "pension_1000": {
+            "age_18": 42,
+            "age_25": 76,
+            "age_30": 116,
+            "age_35": 181
+        },
+        "pension_5000": {
+            "age_18": 210,
+            "age_25": 376,
+            "age_30": 577,
+            "age_35": 902
+        }
+    },
+    "hindi_summary": "Atal Pension Yojana mein 60 saal ke baad har mahine pension milti hai. ₹1,000 se ₹5,000 tak pension chun sakte hain. Jitni jaldi shuru karoge utna kam bharna padega. 18 saal ki umar mein shuru karein toh ₹5,000 pension ke liye har mahine sirf ₹210 bharna padega. Bank mein jaake form bharein."
+}
