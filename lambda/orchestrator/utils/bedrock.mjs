@@ -138,34 +138,27 @@ async function loadFarmingTips() {
 async function buildPrompt(userText, conversationHistory, language) {
     const systemPrompt = loadSystemPrompt();
     const schemes = await loadSchemes();
-    const mandiPrices = await loadMandiPrices();
-    const farmingTips = await loadFarmingTips();
 
-    // Build scheme summaries for context injection
-    const schemeSummaries = Object.values(schemes).map(s =>
-        `${s.name} (${s.hindi_name}): ${s.hindi_summary}`
-    ).join('\n');
-
-    // Build mandi price summary
-    const priceSummary = mandiPrices.prices?.map(p =>
-        `${p.crop} (${p.crop_hindi}): ${p.markets.map(m => `${m.city}: ₹${m.price_per_kg}/kg`).join(', ')}`
-    ).join('\n') || '';
+    // Inject ONLY scheme names — not full details (saves tokens, speeds up response)
+    const schemeNames = Object.values(schemes).map(s =>
+        `${s.name} (${s.hindi_name})`
+    ).join(', ');
 
     // Replace placeholders in system prompt
     let finalPrompt = systemPrompt
-        .replace('{SCHEME_CONTEXT}', `\n## Available Government Schemes:\n${schemeSummaries}`)
-        .replace('{AGRICULTURE_CONTEXT}', `\n## Today's Mandi Prices:\n${priceSummary}`);
+        .replace('{SCHEME_CONTEXT}', `\nAvailable schemes: ${schemeNames}`)
+        .replace('{AGRICULTURE_CONTEXT}', '\nCrop prices and farming tips available on demand.');
 
-    // Add conversation history
-    const historyText = conversationHistory.map(h =>
-        `${h.role === 'user' ? 'User' : 'Assistant'}: ${h.text}`
-    ).join('\n');
-
-    if (historyText) {
-        finalPrompt += `\n\n## Conversation History:\n${historyText}`;
+    // Add only last 3 conversation turns (not all 10)
+    const recentHistory = conversationHistory.slice(-3);
+    if (recentHistory.length > 0) {
+        const historyText = recentHistory.map(h =>
+            `${h.role === 'user' ? 'User' : 'Assistant'}: ${h.text}`
+        ).join('\n');
+        finalPrompt += `\n\nRecent conversation:\n${historyText}`;
     }
 
-    finalPrompt += `\n\nUser's language: ${language}`;
+    finalPrompt += `\nLanguage: ${language}`;
 
     return finalPrompt;
 }
@@ -178,8 +171,8 @@ export async function callBedrock(userText, conversationHistory = [], language =
 
     const payload = {
         anthropic_version: 'bedrock-2023-05-31',
-        max_tokens: 500,
-        temperature: 0.3,
+        max_tokens: 150,
+        temperature: 0.4,
         system: systemPrompt,
         messages: [
             {
