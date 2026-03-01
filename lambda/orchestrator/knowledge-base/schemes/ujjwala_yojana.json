@@ -1,0 +1,49 @@
+{
+    "id": "ujjwala_yojana",
+    "name": "PM Ujjwala Yojana",
+    "full_name": "Pradhan Mantri Ujjwala Yojana",
+    "hindi_name": "प्रधानमंत्री उज्ज्वला योजना",
+    "category": "welfare",
+    "benefit": "Free LPG connection + first refill free + stove subsidy",
+    "benefit_hindi": "Free LPG connection, pehla cylinder free, aur chulha khareedne mein madad",
+    "eligibility": {
+        "description": "Adult women from BPL households",
+        "description_hindi": "BPL parivaar ki 18 saal se upar ki mahilaayein",
+        "criteria": [
+            "Must be an adult woman (18+ years)",
+            "Family must be BPL (Below Poverty Line)",
+            "No existing LPG connection in the household",
+            "Name in SECC 2011 list or belongs to SC/ST/Antyodaya/PMAY/forest dweller category"
+        ],
+        "exclusions": [
+            "Households that already have LPG connection",
+            "Male applicants (connection must be in woman's name)"
+        ]
+    },
+    "documents_required": [
+        "Aadhaar Card (woman applicant)",
+        "BPL card or SECC inclusion proof",
+        "Bank account passbook",
+        "Passport size photo",
+        "Ration card (if available)"
+    ],
+    "how_to_apply": {
+        "steps": [
+            "Visit nearest LPG distributor (HP, Bharat, Indane)",
+            "Fill Ujjwala application form",
+            "Submit Aadhaar, BPL certificate, and bank details",
+            "Verification by distributor",
+            "Free LPG connection within 7-15 days"
+        ],
+        "steps_hindi": [
+            "Nearest gas agency (HP, Bharat, Indane) jaayein",
+            "Ujjwala form bharein",
+            "Aadhaar, BPL card, aur bank passbook dein",
+            "Agency verify karegi",
+            "7-15 din mein free LPG connection mil jayega"
+        ]
+    },
+    "helpline": "1906 / 1800-266-6696",
+    "website": "pmuy.gov.in",
+    "hindi_summary": "Ujjwala Yojana mein garib ghar ki mahilaon ko free LPG gas connection milta hai. Pehla cylinder bhi free hai. Iske liye BPL card aur Aadhaar chahiye. Nearest gas agency mein jaake apply kar sakte hain. Helpline: 1906."
+}

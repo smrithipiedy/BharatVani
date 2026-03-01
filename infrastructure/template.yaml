@@ -6,7 +6,7 @@ Description: >
 
 Globals:
   Function:
-    Timeout: 30
+    Timeout: 60
     Runtime: nodejs18.x
     MemorySize: 256
     Environment:
@@ -20,7 +20,7 @@ Parameters:
     AllowedValues: [dev, prod]
   BedrockModelId:
     Type: String
-    Default: anthropic.claude-3-5-sonnet-20241022-v2:0
+    Default: apac.anthropic.claude-3-5-sonnet-20241022-v2:0
 
 Resources:
 
@@ -93,6 +93,14 @@ Resources:
       BucketName: !Sub 'bharatvani-kb-${AWS::AccountId}-${Environment}'
       VersioningConfiguration:
         Status: Enabled
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+        BlockPublicPolicy: false
+        IgnorePublicAcls: false
+        RestrictPublicBuckets: false
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: BucketOwnerPreferred
       Tags:
         - Key: Project
           Value: BharatVani
@@ -105,7 +113,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: !Sub 'BharatVani-Orchestrator-${Environment}'
-      CodeUri: lambda/orchestrator/
+      CodeUri: ../lambda/orchestrator/
       Handler: index.handler
       Description: BharatVani main orchestrator — handles voice AI pipeline
       Environment:
@@ -114,8 +122,25 @@ Resources:
           USERS_TABLE: !Ref UsersTable
           QUERY_LOGS_TABLE: !Ref QueryLogsTable
           KB_BUCKET: !Ref KnowledgeBucket
+          AUDIO_BUCKET: !Ref KnowledgeBucket
           BEDROCK_MODEL_ID: !Ref BedrockModelId
           ENVIRONMENT: !Ref Environment
+      Events:
+        VoiceIncoming:
+          Type: HttpApi
+          Properties:
+            Path: /voice/incoming
+            Method: POST
+        VoiceGather:
+          Type: HttpApi
+          Properties:
+            Path: /voice/gather
+            Method: POST
+        VoiceHealthCheck:
+          Type: HttpApi
+          Properties:
+            Path: /voice/health
+            Method: GET
       Policies:
         # DynamoDB access
         - DynamoDBCrudPolicy:
@@ -124,8 +149,8 @@ Resources:
             TableName: !Ref UsersTable
         - DynamoDBCrudPolicy:
             TableName: !Ref QueryLogsTable
-        # S3 read access
-        - S3ReadPolicy:
+        # S3 read + write (for Polly audio)
+        - S3CrudPolicy:
             BucketName: !Ref KnowledgeBucket
         # Bedrock access
         - Version: '2012-10-17'
@@ -134,7 +159,10 @@ Resources:
               Action:
                 - bedrock:InvokeModel
                 - bedrock:InvokeModelWithResponseStream
-              Resource: !Sub 'arn:aws:bedrock:${AWS::Region}::foundation-model/*'
+              Resource:
+                - !Sub 'arn:aws:bedrock:${AWS::Region}::foundation-model/*'
+                - !Sub 'arn:aws:bedrock:${AWS::Region}:${AWS::AccountId}:inference-profile/*'
+                - 'arn:aws:bedrock:*::foundation-model/*'
         # SNS for SMS
         - Version: '2012-10-17'
           Statement:
@@ -161,11 +189,14 @@ Resources:
       Principal: connect.amazonaws.com
       SourceAccount: !Ref AWS::AccountId
 
-# ========================================
-# Outputs
-# ========================================
-
 Outputs:
+  ApiEndpoint:
+    Description: API Gateway URL (use this as Twilio webhook)
+    Value: !Sub 'https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com'
+
+  TwilioWebhookUrl:
+    Description: Set this as your Twilio Voice webhook URL
+    Value: !Sub 'https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com/voice/incoming'
   OrchestratorFunctionArn:
     Description: Orchestrator Lambda ARN (use this in Connect)
     Value: !GetAtt OrchestratorFunction.Arn

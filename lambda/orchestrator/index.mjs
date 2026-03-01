@@ -2,14 +2,9 @@
  * BharatVani — Main Lambda Orchestrator
  * Single Lambda that handles the full voice→AI→voice pipeline
  *
- * Architecture:
- *   Amazon Connect → Transcribe → THIS LAMBDA → Polly → back to Connect
- *
- * This is the single orchestrator that:
- * 1. Manages sessions (DynamoDB)
- * 2. Calls Bedrock (one call per turn)
- * 3. Routes to the right handler (schemes, farmer, general)
- * 4. Returns structured response for Connect/Polly
+ * Supports TWO modes:
+ *   1. Twilio: API Gateway → THIS LAMBDA (returns TwiML)
+ *   2. Direct: Test events / Connect (returns JSON)
  */
 
 import { createSession, getSession, updateSession, addToHistory } from './utils/session.mjs';
@@ -17,6 +12,8 @@ import { callBedrock } from './utils/bedrock.mjs';
 import { sendOTP, verifyOTP, sendConfirmationSMS, generateOTP } from './utils/sms.mjs';
 import { handleGovtScheme } from './handlers/govtSchemes.mjs';
 import { handleFarmerQuery } from './handlers/farmerAssistant.mjs';
+import { handleIncoming, handleGather } from './handlers/twilio.mjs';
+import { parse } from 'querystring';
 
 // Load welcome/error messages
 import { readFileSync } from 'fs';
@@ -29,19 +26,29 @@ let welcomeMessages = null;
 let errorResponses = null;
 
 function loadMessages() {
+    const searchPaths = [
+        join(__dirname, '..', '..', 'knowledge-base', 'system'),
+        join(__dirname, 'knowledge-base', 'system'),
+        join('/var/task', 'knowledge-base', 'system')
+    ];
+
     if (!welcomeMessages) {
-        try {
-            welcomeMessages = JSON.parse(readFileSync(join(__dirname, '..', '..', 'knowledge-base', 'system', 'welcome_messages.json'), 'utf-8'));
-        } catch (e) {
-            welcomeMessages = { welcome: { 'hi-IN': 'Namaste! BharatVani mein aapka swagat hai.' } };
+        for (const dir of searchPaths) {
+            try {
+                welcomeMessages = JSON.parse(readFileSync(join(dir, 'welcome_messages.json'), 'utf-8'));
+                break;
+            } catch (e) { continue; }
         }
+        if (!welcomeMessages) welcomeMessages = { welcome: { 'hi-IN': 'Namaste! BharatVani mein aapka swagat hai.' } };
     }
     if (!errorResponses) {
-        try {
-            errorResponses = JSON.parse(readFileSync(join(__dirname, '..', '..', 'knowledge-base', 'system', 'error_responses.json'), 'utf-8'));
-        } catch (e) {
-            errorResponses = { general_error: { 'hi-IN': 'Kuch gadbad ho gayi. Kripya dobara try karein.' } };
+        for (const dir of searchPaths) {
+            try {
+                errorResponses = JSON.parse(readFileSync(join(dir, 'error_responses.json'), 'utf-8'));
+                break;
+            } catch (e) { continue; }
         }
+        if (!errorResponses) errorResponses = { general_error: { 'hi-IN': 'Kuch gadbad ho gayi. Kripya dobara try karein.' } };
     }
 }
 
@@ -68,8 +75,17 @@ export async function handler(event) {
 
     loadMessages();
 
+    // ========================================
+    // MODE 1: API Gateway + Twilio webhooks
+    // ========================================
+    if (event.requestContext && (event.httpMethod || event.requestContext.http)) {
+        return await handleTwilioEvent(event);
+    }
+
+    // ========================================
+    // MODE 2: Direct invocation (test/Connect)
+    // ========================================
     try {
-        // Extract data from Connect event (or test event)
         const contactData = event.Details?.ContactData || {};
         const params = event.Details?.Parameters || event;
 
@@ -89,7 +105,7 @@ export async function handler(event) {
                 return await handleEndCall(sessionId);
 
             default:
-                return buildResponse('general_error', null, 'hi-IN');
+                return buildConnectResponse('Kuch gadbad ho gayi.', 'hi-IN', null, 'continue');
         }
 
     } catch (error) {
@@ -100,6 +116,47 @@ export async function handler(event) {
             null,
             'continue'
         );
+    }
+}
+
+/**
+ * Handle Twilio webhook events via API Gateway
+ */
+async function handleTwilioEvent(event) {
+    try {
+        const path = event.path || event.rawPath || event.requestContext?.http?.path || '';
+        const body = event.isBase64Encoded
+            ? Buffer.from(event.body, 'base64').toString('utf-8')
+            : (event.body || '');
+        const params = parse(body);
+        const queryParams = event.queryStringParameters || {};
+
+        console.log('Twilio path:', path, 'params:', JSON.stringify(params));
+
+        let twimlResponse;
+
+        if (path.includes('/voice/incoming')) {
+            twimlResponse = await handleIncoming(params);
+        } else if (path.includes('/voice/gather')) {
+            const sessionId = queryParams.sessionId || '';
+            twimlResponse = await handleGather(params, sessionId);
+        } else {
+            twimlResponse = `<?xml version="1.0" encoding="UTF-8"?><Response><Say language="hi-IN">BharatVani service active hai.</Say></Response>`;
+        }
+
+        return {
+            statusCode: 200,
+            headers: { 'Content-Type': 'application/xml' },
+            body: twimlResponse
+        };
+
+    } catch (err) {
+        console.error('Twilio handler error:', err);
+        return {
+            statusCode: 200,
+            headers: { 'Content-Type': 'application/xml' },
+            body: `<?xml version="1.0" encoding="UTF-8"?><Response><Say language="hi-IN" voice="Polly.Aditi">Maaf kijiye, kuch problem ho gayi.</Say></Response>`
+        };
     }
 }
 

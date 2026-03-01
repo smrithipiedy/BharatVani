@@ -1,0 +1,50 @@
+{
+    "id": "ayushman_bharat",
+    "name": "Ayushman Bharat (PM-JAY)",
+    "full_name": "Pradhan Mantri Jan Arogya Yojana",
+    "hindi_name": "प्रधानमंत्री जन आरोग्य योजना (आयुष्मान भारत)",
+    "category": "health",
+    "benefit": "Free health insurance up to ₹5,00,000 per family per year",
+    "benefit_hindi": "₹5 lakh tak ka free ilaaj har saal, poore parivaar ke liye",
+    "eligibility": {
+        "description": "Families identified in SECC 2011 database — rural and urban poor",
+        "description_hindi": "SECC 2011 list mein naam hona chahiye — gaon aur shahar ke garib parivaar",
+        "criteria": [
+            "Family must be in SECC 2011 database",
+            "Rural: kaccha house, no adult earning member, SC/ST, landless laborers",
+            "Urban: ragpickers, street vendors, domestic workers, construction workers",
+            "No age limit, no family size limit"
+        ],
+        "exclusions": [
+            "Families not in SECC 2011 list",
+            "Those with government health insurance already"
+        ]
+    },
+    "documents_required": [
+        "Aadhaar Card",
+        "Ration Card",
+        "SECC 2011 inclusion proof (check on website)",
+        "Any government ID"
+    ],
+    "how_to_apply": {
+        "steps": [
+            "Check eligibility at mera.pmjay.gov.in",
+            "Visit nearest Ayushman Mitra at empanelled hospital",
+            "Or visit CSC center",
+            "Show Aadhaar and Ration card",
+            "Get Ayushman card generated on the spot",
+            "Use card at any empanelled hospital for free treatment"
+        ],
+        "steps_hindi": [
+            "mera.pmjay.gov.in par eligibility check karein",
+            "Nearest government hospital mein Ayushman Mitra se milein",
+            "Ya CSC center jaayein",
+            "Aadhaar aur Ration card dikhaayein",
+            "Ayushman card waheen ban jayega",
+            "Card dikha kar kisi bhi listed hospital mein free ilaaj karwayein"
+        ]
+    },
+    "helpline": "14555 / 1800-111-565",
+    "website": "pmjay.gov.in",
+    "hindi_summary": "Ayushman Bharat mein garib parivaar ko saal mein 5 lakh rupaye tak ka free ilaaj milta hai. Ye scheme SECC 2011 list ke logon ke liye hai. Eligibility check karne ke liye 14555 par call karein ya mera.pmjay.gov.in par jaayein. Aadhaar aur Ration card se Ayushman card ban jaata hai."
+}

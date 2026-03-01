@@ -1,0 +1,18 @@
+{
+    "welcome": {
+        "hi-IN": "Namaste! BharatVani mein aapka swagat hai. Aap kya jaanna chahte hain?",
+        "en-IN": "Namaste! Welcome to BharatVani. How can I help you today?"
+    },
+    "welcome_returning": {
+        "hi-IN": "Namaste! BharatVani mein phir se swagat hai. Aaj kya madad karoon?",
+        "en-IN": "Welcome back to BharatVani! How can I help you today?"
+    },
+    "nudge": {
+        "hi-IN": "Kya aap kuch poochna chahte hain? Main sun raha hoon.",
+        "en-IN": "Would you like to ask something? I'm listening."
+    },
+    "goodbye": {
+        "hi-IN": "Shukriya! BharatVani har samay aapki seva mein hai. Dobara call karein!",
+        "en-IN": "Thank you! BharatVani is always here to help. Call again anytime!"
+    }
+}

@@ -27,16 +27,33 @@ let cachedMandiPrices = null;
 let cachedFarmingTips = null;
 
 /**
+ * Resolve knowledge base path — works both locally and in Lambda
+ */
+function getKBPath(...segments) {
+    const __dirname = dirname(fileURLToPath(import.meta.url));
+    // Try local dev path first
+    const localPath = join(__dirname, '..', '..', '..', 'knowledge-base', ...segments);
+    try { readFileSync(localPath); return localPath; } catch (e) { /* ignore */ }
+    // Try Lambda bundled path
+    const lambdaPath = join('/var/task', 'knowledge-base', ...segments);
+    try { readFileSync(lambdaPath); return lambdaPath; } catch (e) { /* ignore */ }
+    // Try relative to task root
+    const taskPath = join(process.cwd(), 'knowledge-base', ...segments);
+    return taskPath;
+}
+
+/**
  * Load system prompt from local file (packaged with Lambda)
  */
 function loadSystemPrompt() {
     if (cachedSystemPrompt) return cachedSystemPrompt;
 
     try {
-        const __dirname = dirname(fileURLToPath(import.meta.url));
-        const promptPath = join(__dirname, '..', '..', '..', 'knowledge-base', 'system', 'system_prompt.txt');
+        const promptPath = getKBPath('system', 'system_prompt.txt');
         cachedSystemPrompt = readFileSync(promptPath, 'utf-8');
+        console.log('System prompt loaded successfully');
     } catch (err) {
+        console.warn('Could not load system prompt file, using fallback:', err.message);
         // Fallback: minimal system prompt
         cachedSystemPrompt = 'You are BharatVani, a helpful AI voice assistant for Indian citizens. Respond in Hindi. Keep responses under 30 words. Always return JSON with intent, response_text, and entities fields.';
     }
@@ -50,22 +67,32 @@ function loadSystemPrompt() {
 async function loadSchemes() {
     if (cachedSchemes) return cachedSchemes;
 
-    try {
-        const __dirname = dirname(fileURLToPath(import.meta.url));
-        const schemesDir = join(__dirname, '..', '..', '..', 'knowledge-base', 'schemes');
-        const { readdirSync } = await import('fs');
-        const files = readdirSync(schemesDir).filter(f => f.endsWith('.json'));
+    const searchPaths = [
+        join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..', 'knowledge-base', 'schemes'),
+        join('/var/task', 'knowledge-base', 'schemes'),
+        join(process.cwd(), 'knowledge-base', 'schemes')
+    ];
 
-        cachedSchemes = {};
-        for (const file of files) {
-            const data = JSON.parse(readFileSync(join(schemesDir, file), 'utf-8'));
-            cachedSchemes[data.id] = data;
+    for (const schemesDir of searchPaths) {
+        try {
+            const { readdirSync } = await import('fs');
+            const files = readdirSync(schemesDir).filter(f => f.endsWith('.json'));
+            if (files.length === 0) continue;
+
+            cachedSchemes = {};
+            for (const file of files) {
+                const data = JSON.parse(readFileSync(join(schemesDir, file), 'utf-8'));
+                cachedSchemes[data.id] = data;
+            }
+            console.log(`Loaded ${files.length} schemes from ${schemesDir}`);
+            return cachedSchemes;
+        } catch (err) {
+            continue;
         }
-    } catch (err) {
-        console.warn('Could not load schemes from local files, trying S3...', err.message);
-        cachedSchemes = {};
     }
 
+    console.warn('Could not load schemes from any path');
+    cachedSchemes = {};
     return cachedSchemes;
 }
 
@@ -76,9 +103,9 @@ async function loadMandiPrices() {
     if (cachedMandiPrices) return cachedMandiPrices;
 
     try {
-        const __dirname = dirname(fileURLToPath(import.meta.url));
-        const pricesPath = join(__dirname, '..', '..', '..', 'knowledge-base', 'agriculture', 'mandi_prices.json');
+        const pricesPath = getKBPath('agriculture', 'mandi_prices.json');
         cachedMandiPrices = JSON.parse(readFileSync(pricesPath, 'utf-8'));
+        console.log('Mandi prices loaded successfully');
     } catch (err) {
         console.warn('Could not load mandi prices:', err.message);
         cachedMandiPrices = { prices: [] };
@@ -94,9 +121,9 @@ async function loadFarmingTips() {
     if (cachedFarmingTips) return cachedFarmingTips;
 
     try {
-        const __dirname = dirname(fileURLToPath(import.meta.url));
-        const tipsPath = join(__dirname, '..', '..', '..', 'knowledge-base', 'agriculture', 'farming_tips.json');
+        const tipsPath = getKBPath('agriculture', 'farming_tips.json');
         cachedFarmingTips = JSON.parse(readFileSync(tipsPath, 'utf-8'));
+        console.log('Farming tips loaded successfully');
     } catch (err) {
         console.warn('Could not load farming tips:', err.message);
         cachedFarmingTips = { seasonal_tips: {}, general_tips: [] };
@@ -157,10 +184,12 @@ export async function callBedrock(userText, conversationHistory = [], language =
         messages: [
             {
                 role: 'user',
-                content: userText
+                content: [{ type: 'text', text: userText }]
             }
         ]
     };
+
+    console.log('Calling Bedrock with model:', MODEL_ID);
 
     try {
         const command = new InvokeModelCommand({
@@ -200,7 +229,7 @@ export async function callBedrock(userText, conversationHistory = [], language =
         };
 
     } catch (err) {
-        console.error('Bedrock call failed:', err);
+        console.error('Bedrock call failed:', err.name, err.message, JSON.stringify(err.$metadata || {}));
         return {
             intent: 'error',
             confidence: 0,
