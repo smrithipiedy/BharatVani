@@ -149,8 +149,8 @@ async function buildPrompt(userText, conversationHistory, language) {
         .replace('{SCHEME_CONTEXT}', `\nAvailable schemes: ${schemeNames}`)
         .replace('{AGRICULTURE_CONTEXT}', '\nCrop prices and farming tips available on demand.');
 
-    // Add only last 3 conversation turns (not all 10)
-    const recentHistory = conversationHistory.slice(-3);
+    // Add last 6 conversation turns for context
+    const recentHistory = conversationHistory.slice(-6);
     if (recentHistory.length > 0) {
         const historyText = recentHistory.map(h =>
             `${h.role === 'user' ? 'User' : 'Assistant'}: ${h.text}`
@@ -171,7 +171,7 @@ export async function callBedrock(userText, conversationHistory = [], language =
 
     const payload = {
         anthropic_version: 'bedrock-2023-05-31',
-        max_tokens: 150,
+        max_tokens: 200,
         temperature: 0.5,
         system: systemPrompt,
         messages: [
