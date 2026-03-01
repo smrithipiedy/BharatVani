@@ -172,7 +172,7 @@ export async function callBedrock(userText, conversationHistory = [], language =
     const payload = {
         anthropic_version: 'bedrock-2023-05-31',
         max_tokens: 150,
-        temperature: 0.4,
+        temperature: 0.5,
         system: systemPrompt,
         messages: [
             {
@@ -195,28 +195,14 @@ export async function callBedrock(userText, conversationHistory = [], language =
         const response = await bedrockClient.send(command);
         const responseBody = JSON.parse(new TextDecoder().decode(response.body));
 
-        // Extract the text content from Bedrock's response
-        const textContent = responseBody.content?.[0]?.text || '{}';
+        // Get plain text response — no JSON parsing needed
+        const textContent = responseBody.content?.[0]?.text || '';
+        console.log('Bedrock raw response:', textContent);
 
-        // Parse the structured JSON response
-        try {
-            // Try to find JSON in the response (Claude sometimes wraps in markdown)
-            const jsonMatch = textContent.match(/\{[\s\S]*\}/);
-            if (jsonMatch) {
-                return JSON.parse(jsonMatch[0]);
-            }
-        } catch (parseErr) {
-            console.warn('Could not parse Bedrock response as JSON:', parseErr.message);
-        }
-
-        // Fallback: return a general response
+        // Return simple response object
         return {
-            intent: 'general_knowledge',
-            confidence: 0.5,
-            category: 'INFORMATION',
-            entities: {},
-            needs_verification: false,
-            response_text: textContent.substring(0, 200),
+            intent: 'general',
+            response_text: textContent.trim() || 'Maaf kijiye, kripya dobara boliye.',
             follow_up: null,
             sms_content: null
         };
@@ -225,13 +211,7 @@ export async function callBedrock(userText, conversationHistory = [], language =
         console.error('Bedrock call failed:', err.name, err.message, JSON.stringify(err.$metadata || {}));
         return {
             intent: 'error',
-            confidence: 0,
-            category: 'NAVIGATION',
-            entities: {},
-            needs_verification: false,
-            response_text: language === 'en-IN'
-                ? 'Sorry, I could not process your request. Please try again.'
-                : 'Maaf kijiye, aapki request process nahi ho payi. Kripya dobara try karein.',
+            response_text: 'Maaf kijiye, thodi der mein dobara try karein.',
             follow_up: null,
             sms_content: null
         };
