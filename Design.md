@@ -838,11 +838,11 @@ Every new service is **one Lambda + one S3 file + one intent mapping** away from
 
 <div align="center">
 
-### 🏆  BharatVani— The Internet, Spoken.
+### 🏆 BharatVani — The Internet, Spoken.
 
 *Designed for 700 million Indians who deserve digital access.*
 
-**Team PioneerX** | AI for Bharat Hackathon 2026
+**Team BharatVani** | AI for Bharat Hackathon 2026
 
 *Built entirely on AWS — Amazon Connect • Bedrock • Transcribe • Polly • Lambda • DynamoDB • S3 • SNS • CloudWatch • IAM*
 
