@@ -1,0 +1,51 @@
+{
+    "id": "pm_awas_yojana",
+    "name": "PM Awas Yojana (Gramin)",
+    "full_name": "Pradhan Mantri Awas Yojana - Gramin",
+    "hindi_name": "प्रधानमंत्री आवास योजना (ग्रामीण)",
+    "category": "housing",
+    "benefit": "₹1,20,000 for house construction in plains, ₹1,30,000 in hilly areas + toilet grant of ₹12,000",
+    "benefit_hindi": "Ghar banane ke liye ₹1,20,000 (plains mein), ₹1,30,000 (pahadi area mein) + toilet ke liye ₹12,000 alag se",
+    "eligibility": {
+        "description": "Homeless families or those living in kaccha/dilapidated houses in rural areas",
+        "description_hindi": "Gaon mein begharon ya kacche ghar mein rehne walon ke liye",
+        "criteria": [
+            "Must be houseless or living in kaccha/zero-room house",
+            "Must be in SECC 2011 Awas list",
+            "Priority: SC/ST, minorities, freed bonded laborers",
+            "Rural areas only (for Gramin scheme)"
+        ],
+        "exclusions": [
+            "Families who already received housing assistance",
+            "Government employees",
+            "Income tax payers",
+            "Those owning pucca house"
+        ]
+    },
+    "documents_required": [
+        "Aadhaar Card",
+        "SECC 2011 Awas list inclusion",
+        "Job card (MGNREGA)",
+        "Bank account details",
+        "Land ownership proof or allotment letter"
+    ],
+    "how_to_apply": {
+        "steps": [
+            "Check name in SECC Awas list at your Gram Panchayat",
+            "Gram Sabha verifies and approves beneficiary list",
+            "Apply through Gram Panchayat or Block office",
+            "Amount released in 3 installments after each stage inspection",
+            "House must be completed within 12 months"
+        ],
+        "steps_hindi": [
+            "Gram Panchayat mein SECC Awas list mein apna naam check karein",
+            "Gram Sabha verify karegi",
+            "Gram Panchayat ya Block office mein apply karein",
+            "Paisa 3 installment mein aayega — ghar banne ke har stage par",
+            "Ghar 12 mahine mein banana hoga"
+        ]
+    },
+    "helpline": "1800-11-6446",
+    "website": "pmayg.nic.in",
+    "hindi_summary": "PM Awas Yojana mein garib parivaar ko ghar banane ke liye 1 lakh 20 hazaar rupaye milte hain. Pahadi area mein 1 lakh 30 hazaar milte hain. Toilet ke liye 12 hazaar alag se milte hain. Gram Panchayat mein jaake apply karein. SECC list mein naam hona chahiye."
+}

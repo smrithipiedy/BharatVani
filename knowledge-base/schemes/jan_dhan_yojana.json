@@ -1,0 +1,46 @@
+{
+    "id": "jan_dhan_yojana",
+    "name": "PM Jan Dhan Yojana",
+    "full_name": "Pradhan Mantri Jan Dhan Yojana",
+    "hindi_name": "प्रधानमंत्री जन धन योजना",
+    "category": "financial_inclusion",
+    "benefit": "Zero balance bank account + RuPay debit card + ₹2 lakh accident insurance + ₹30,000 life insurance",
+    "benefit_hindi": "Zero balance bank account, RuPay debit card, ₹2 lakh accident insurance, ₹30,000 life insurance",
+    "eligibility": {
+        "description": "Any Indian citizen who does not have a bank account",
+        "description_hindi": "Koi bhi Bharatiya naagrik jiske paas bank account nahi hai",
+        "criteria": [
+            "Indian citizen aged 10 years and above",
+            "No existing bank account needed",
+            "Zero balance — no minimum balance required",
+            "Minor (10+) can open with guardian"
+        ],
+        "exclusions": []
+    },
+    "documents_required": [
+        "Aadhaar Card (preferred)",
+        "Or any one: Voter ID, Driving License, PAN card, Passport, MGNREGA card",
+        "If no documents: self-declaration with photograph attested by gazetted officer"
+    ],
+    "how_to_apply": {
+        "steps": [
+            "Visit nearest bank branch (any nationalized bank)",
+            "Ask for Jan Dhan account opening form",
+            "Submit Aadhaar card copy",
+            "Account opens immediately — same day",
+            "RuPay debit card issued",
+            "Overdraft facility of ₹10,000 after 6 months"
+        ],
+        "steps_hindi": [
+            "Nearest government bank jaayein",
+            "Jan Dhan account ka form maangein",
+            "Aadhaar card ki copy dein",
+            "Account usi din khul jayega",
+            "RuPay debit card milega",
+            "6 mahine baad ₹10,000 overdraft bhi milta hai"
+        ]
+    },
+    "helpline": "1800-11-0001 / 1800-180-1111",
+    "website": "pmjdy.gov.in",
+    "hindi_summary": "Jan Dhan Yojana mein kisi bhi bank mein zero balance account khul sakta hai. RuPay debit card free milta hai. 2 lakh ka accident insurance aur 30 hazaar ka life insurance bhi milta hai. Sirf Aadhaar card chahiye. Nearest bank mein jaake usi din account khul jayega."
+}

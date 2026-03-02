@@ -1,0 +1,331 @@
+{
+    "last_updated": "2026-02-26",
+    "source": "Mock data based on Agmarknet.gov.in patterns",
+    "note": "For hackathon demo. In production, this would be scraped/API-fed daily.",
+    "prices": [
+        {
+            "crop": "Tomato",
+            "crop_hindi": "टमाटर",
+            "markets": [
+                {
+                    "city": "Delhi",
+                    "market": "Azadpur Mandi",
+                    "price_per_kg": 25,
+                    "unit": "₹/kg"
+                },
+                {
+                    "city": "Mumbai",
+                    "market": "Vashi Mandi",
+                    "price_per_kg": 30,
+                    "unit": "₹/kg"
+                },
+                {
+                    "city": "Patna",
+                    "market": "Patna Mandi",
+                    "price_per_kg": 22,
+                    "unit": "₹/kg"
+                },
+                {
+                    "city": "Lucknow",
+                    "market": "Lucknow Mandi",
+                    "price_per_kg": 24,
+                    "unit": "₹/kg"
+                },
+                {
+                    "city": "Jaipur",
+                    "market": "Muhana Mandi",
+                    "price_per_kg": 26,
+                    "unit": "₹/kg"
+                }
+            ]
+        },
+        {
+            "crop": "Onion",
+            "crop_hindi": "प्याज",
+            "markets": [
+                {
+                    "city": "Delhi",
+                    "market": "Azadpur Mandi",
+                    "price_per_kg": 18,
+                    "unit": "₹/kg"
+                },
+                {
+                    "city": "Mumbai",
+                    "market": "Vashi Mandi",
+                    "price_per_kg": 20,
+                    "unit": "₹/kg"
+                },
+                {
+                    "city": "Nashik",
+                    "market": "Lasalgaon Mandi",
+                    "price_per_kg": 15,
+                    "unit": "₹/kg"
+                },
+                {
+                    "city": "Patna",
+                    "market": "Patna Mandi",
+                    "price_per_kg": 22,
+                    "unit": "₹/kg"
+                },
+                {
+                    "city": "Lucknow",
+                    "market": "Lucknow Mandi",
+                    "price_per_kg": 19,
+                    "unit": "₹/kg"
+                }
+            ]
+        },
+        {
+            "crop": "Potato",
+            "crop_hindi": "आलू",
+            "markets": [
+                {
+                    "city": "Delhi",
+                    "market": "Azadpur Mandi",
+                    "price_per_kg": 12,
+                    "unit": "₹/kg"
+                },
+                {
+                    "city": "Mumbai",
+                    "market": "Vashi Mandi",
+                    "price_per_kg": 15,
+                    "unit": "₹/kg"
+                },
+                {
+                    "city": "Patna",
+                    "market": "Patna Mandi",
+                    "price_per_kg": 10,
+                    "unit": "₹/kg"
+                },
+                {
+                    "city": "Lucknow",
+                    "market": "Lucknow Mandi",
+                    "price_per_kg": 11,
+                    "unit": "₹/kg"
+                },
+                {
+                    "city": "Kolkata",
+                    "market": "Koley Market",
+                    "price_per_kg": 14,
+                    "unit": "₹/kg"
+                }
+            ]
+        },
+        {
+            "crop": "Wheat",
+            "crop_hindi": "गेहूं",
+            "markets": [
+                {
+                    "city": "Delhi",
+                    "market": "Azadpur Mandi",
+                    "price_per_kg": 28,
+                    "unit": "₹/kg"
+                },
+                {
+                    "city": "Lucknow",
+                    "market": "Lucknow Mandi",
+                    "price_per_kg": 26,
+                    "unit": "₹/kg"
+                },
+                {
+                    "city": "Jaipur",
+                    "market": "Muhana Mandi",
+                    "price_per_kg": 27,
+                    "unit": "₹/kg"
+                },
+                {
+                    "city": "Patna",
+                    "market": "Patna Mandi",
+                    "price_per_kg": 25,
+                    "unit": "₹/kg"
+                },
+                {
+                    "city": "Bhopal",
+                    "market": "Bhopal Mandi",
+                    "price_per_kg": 26,
+                    "unit": "₹/kg"
+                }
+            ]
+        },
+        {
+            "crop": "Rice",
+            "crop_hindi": "चावल",
+            "markets": [
+                {
+                    "city": "Delhi",
+                    "market": "Azadpur Mandi",
+                    "price_per_kg": 35,
+                    "unit": "₹/kg"
+                },
+                {
+                    "city": "Mumbai",
+                    "market": "Vashi Mandi",
+                    "price_per_kg": 38,
+                    "unit": "₹/kg"
+                },
+                {
+                    "city": "Patna",
+                    "market": "Patna Mandi",
+                    "price_per_kg": 30,
+                    "unit": "₹/kg"
+                },
+                {
+                    "city": "Kolkata",
+                    "market": "Koley Market",
+                    "price_per_kg": 32,
+                    "unit": "₹/kg"
+                },
+                {
+                    "city": "Lucknow",
+                    "market": "Lucknow Mandi",
+                    "price_per_kg": 33,
+                    "unit": "₹/kg"
+                }
+            ]
+        },
+        {
+            "crop": "Mustard",
+            "crop_hindi": "सरसों",
+            "markets": [
+                {
+                    "city": "Jaipur",
+                    "market": "Muhana Mandi",
+                    "price_per_kg": 55,
+                    "unit": "₹/kg"
+                },
+                {
+                    "city": "Delhi",
+                    "market": "Azadpur Mandi",
+                    "price_per_kg": 58,
+                    "unit": "₹/kg"
+                },
+                {
+                    "city": "Lucknow",
+                    "market": "Lucknow Mandi",
+                    "price_per_kg": 56,
+                    "unit": "₹/kg"
+                },
+                {
+                    "city": "Bhopal",
+                    "market": "Bhopal Mandi",
+                    "price_per_kg": 54,
+                    "unit": "₹/kg"
+                }
+            ]
+        },
+        {
+            "crop": "Sugarcane",
+            "crop_hindi": "गन्ना",
+            "markets": [
+                {
+                    "city": "Lucknow",
+                    "market": "Lucknow",
+                    "price_per_kg": 3.5,
+                    "unit": "₹/kg"
+                },
+                {
+                    "city": "Patna",
+                    "market": "Patna",
+                    "price_per_kg": 3.2,
+                    "unit": "₹/kg"
+                },
+                {
+                    "city": "Pune",
+                    "market": "Pune",
+                    "price_per_kg": 3.3,
+                    "unit": "₹/kg"
+                }
+            ]
+        },
+        {
+            "crop": "Green Chilli",
+            "crop_hindi": "हरी मिर्च",
+            "markets": [
+                {
+                    "city": "Delhi",
+                    "market": "Azadpur Mandi",
+                    "price_per_kg": 40,
+                    "unit": "₹/kg"
+                },
+                {
+                    "city": "Mumbai",
+                    "market": "Vashi Mandi",
+                    "price_per_kg": 45,
+                    "unit": "₹/kg"
+                },
+                {
+                    "city": "Jaipur",
+                    "market": "Muhana Mandi",
+                    "price_per_kg": 35,
+                    "unit": "₹/kg"
+                },
+                {
+                    "city": "Patna",
+                    "market": "Patna Mandi",
+                    "price_per_kg": 38,
+                    "unit": "₹/kg"
+                }
+            ]
+        },
+        {
+            "crop": "Cauliflower",
+            "crop_hindi": "फूलगोभी",
+            "markets": [
+                {
+                    "city": "Delhi",
+                    "market": "Azadpur Mandi",
+                    "price_per_kg": 15,
+                    "unit": "₹/kg"
+                },
+                {
+                    "city": "Mumbai",
+                    "market": "Vashi Mandi",
+                    "price_per_kg": 20,
+                    "unit": "₹/kg"
+                },
+                {
+                    "city": "Patna",
+                    "market": "Patna Mandi",
+                    "price_per_kg": 12,
+                    "unit": "₹/kg"
+                },
+                {
+                    "city": "Lucknow",
+                    "market": "Lucknow Mandi",
+                    "price_per_kg": 14,
+                    "unit": "₹/kg"
+                }
+            ]
+        },
+        {
+            "crop": "Cabbage",
+            "crop_hindi": "पत्तागोभी",
+            "markets": [
+                {
+                    "city": "Delhi",
+                    "market": "Azadpur Mandi",
+                    "price_per_kg": 10,
+                    "unit": "₹/kg"
+                },
+                {
+                    "city": "Mumbai",
+                    "market": "Vashi Mandi",
+                    "price_per_kg": 14,
+                    "unit": "₹/kg"
+                },
+                {
+                    "city": "Patna",
+                    "market": "Patna Mandi",
+                    "price_per_kg": 8,
+                    "unit": "₹/kg"
+                },
+                {
+                    "city": "Lucknow",
+                    "market": "Lucknow Mandi",
+                    "price_per_kg": 9,
+                    "unit": "₹/kg"
+                }
+            ]
+        }
+    ]
+}

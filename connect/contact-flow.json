@@ -1,0 +1,163 @@
+{
+    "Version": "2019-10-30",
+    "StartAction": "WelcomeAction",
+    "Metadata": {
+        "EntryPointId": "WelcomeAction",
+        "Name": "BharatVani Voice Flow",
+        "Description": "Main contact flow for BharatVani AI voice assistant"
+    },
+    "Actions": {
+        "WelcomeAction": {
+            "Type": "InvokeLambdaFunction",
+            "Parameters": {
+                "LambdaFunctionARN": "${LAMBDA_ARN}",
+                "InvocationTimeLimitSeconds": "8",
+                "Parameters": {
+                    "action": "NEW_CALL"
+                }
+            },
+            "Transitions": {
+                "NextAction": "SpeakWelcome",
+                "Errors": [
+                    {
+                        "NextAction": "ErrorHandler",
+                        "ErrorType": "NoMatchingError"
+                    }
+                ]
+            }
+        },
+        "SpeakWelcome": {
+            "Type": "MessageParticipant",
+            "Parameters": {
+                "Text": "$.External.responseText",
+                "TextToSpeechType": "ssml",
+                "SSML": "<speak><prosody rate='95%'>$.External.responseText</prosody></speak>",
+                "VoiceId": "Aditi",
+                "LanguageCode": "hi-IN"
+            },
+            "Transitions": {
+                "NextAction": "ListenForInput"
+            }
+        },
+        "ListenForInput": {
+            "Type": "GetParticipantInput",
+            "Parameters": {
+                "Timeout": "10",
+                "TextToSpeechType": "text",
+                "SpeechAttributes": {
+                    "LanguageCode": "hi-IN",
+                    "VocabularyName": "BharatVani-Hindi"
+                }
+            },
+            "Transitions": {
+                "NextAction": "ProcessInput",
+                "Errors": [
+                    {
+                        "NextAction": "NudgeUser",
+                        "ErrorType": "InputTimedOut"
+                    },
+                    {
+                        "NextAction": "ErrorHandler",
+                        "ErrorType": "NoMatchingError"
+                    }
+                ]
+            }
+        },
+        "ProcessInput": {
+            "Type": "InvokeLambdaFunction",
+            "Parameters": {
+                "LambdaFunctionARN": "${LAMBDA_ARN}",
+                "InvocationTimeLimitSeconds": "15",
+                "Parameters": {
+                    "action": "USER_INPUT",
+                    "userText": "$.Transcription",
+                    "sessionId": "$.Attributes.sessionId"
+                }
+            },
+            "Transitions": {
+                "NextAction": "CheckAction",
+                "Errors": [
+                    {
+                        "NextAction": "ErrorHandler",
+                        "ErrorType": "NoMatchingError"
+                    }
+                ]
+            }
+        },
+        "CheckAction": {
+            "Type": "CheckAttribute",
+            "Parameters": {
+                "Attribute": "$.External.action",
+                "ComparisonType": "Equals",
+                "Value": "end"
+            },
+            "Transitions": {
+                "True": "SpeakGoodbye",
+                "False": "SpeakResponse"
+            }
+        },
+        "SpeakResponse": {
+            "Type": "MessageParticipant",
+            "Parameters": {
+                "Text": "$.External.responseText",
+                "TextToSpeechType": "ssml",
+                "SSML": "<speak><prosody rate='95%'>$.External.responseText</prosody></speak>",
+                "VoiceId": "Aditi",
+                "LanguageCode": "hi-IN"
+            },
+            "Transitions": {
+                "NextAction": "StoreSessionId"
+            }
+        },
+        "StoreSessionId": {
+            "Type": "SetAttributes",
+            "Parameters": {
+                "Attributes": {
+                    "sessionId": "$.External.sessionId"
+                }
+            },
+            "Transitions": {
+                "NextAction": "ListenForInput"
+            }
+        },
+        "NudgeUser": {
+            "Type": "MessageParticipant",
+            "Parameters": {
+                "Text": "Kya aap kuch poochna chahte hain? Main sun raha hoon.",
+                "VoiceId": "Aditi",
+                "LanguageCode": "hi-IN"
+            },
+            "Transitions": {
+                "NextAction": "ListenForInput"
+            }
+        },
+        "SpeakGoodbye": {
+            "Type": "MessageParticipant",
+            "Parameters": {
+                "Text": "$.External.responseText",
+                "TextToSpeechType": "ssml",
+                "SSML": "<speak><prosody rate='95%'>$.External.responseText</prosody></speak>",
+                "VoiceId": "Aditi",
+                "LanguageCode": "hi-IN"
+            },
+            "Transitions": {
+                "NextAction": "DisconnectCall"
+            }
+        },
+        "ErrorHandler": {
+            "Type": "MessageParticipant",
+            "Parameters": {
+                "Text": "Kuch gadbad ho gayi. Kripya thodi der baad dobara call karein. Dhanyavaad!",
+                "VoiceId": "Aditi",
+                "LanguageCode": "hi-IN"
+            },
+            "Transitions": {
+                "NextAction": "DisconnectCall"
+            }
+        },
+        "DisconnectCall": {
+            "Type": "DisconnectParticipant",
+            "Parameters": {}
+        }
+    }
+}

@@ -1,0 +1,120 @@
+{
+    "seasonal_tips": {
+        "rabi": {
+            "season_hindi": "रबी (सर्दी की फसल)",
+            "months": "October - March",
+            "crops": [
+                "Wheat",
+                "Barley",
+                "Mustard",
+                "Peas",
+                "Gram"
+            ],
+            "tips": [
+                {
+                    "tip": "Gehun ki buvai November ke pehle hafte mein karein — der se buvai mein yield kam hoti hai",
+                    "crop": "Wheat",
+                    "month": "November"
+                },
+                {
+                    "tip": "Sarson ki fasal mein pehla paani buvai ke 25-30 din baad dein",
+                    "crop": "Mustard",
+                    "month": "November-December"
+                },
+                {
+                    "tip": "Gehun mein urea ki top dressing 3 baar karein — buvai ke 21, 42 aur 60 din baad",
+                    "crop": "Wheat",
+                    "month": "December-January"
+                },
+                {
+                    "tip": "Chana ki fasal mein pod borer ke liye dhyan rakhein — January-February mein spray karein",
+                    "crop": "Gram",
+                    "month": "January-February"
+                }
+            ]
+        },
+        "kharif": {
+            "season_hindi": "खरीफ (बारिश की फसल)",
+            "months": "June - October",
+            "crops": [
+                "Rice",
+                "Maize",
+                "Cotton",
+                "Soybean",
+                "Sugarcane"
+            ],
+            "tips": [
+                {
+                    "tip": "Dhaan ki ropai June ke teesre hafte se shuru karein — nursery 21 din pehle tayyaar karein",
+                    "crop": "Rice",
+                    "month": "June"
+                },
+                {
+                    "tip": "Makka mein zinc ki kami se patte peele padte hain — zinc sulphate 25 kg/hectare dalein",
+                    "crop": "Maize",
+                    "month": "July"
+                },
+                {
+                    "tip": "Kapas mein chitte makode ke liye neem ka tel spray karein — 5ml/litre paani mein",
+                    "crop": "Cotton",
+                    "month": "August"
+                },
+                {
+                    "tip": "Soybean ki katai 90-100 din mein karein — jab 80% phaliyan bhuri ho jayein",
+                    "crop": "Soybean",
+                    "month": "October"
+                }
+            ]
+        },
+        "zaid": {
+            "season_hindi": "जायद (गर्मी की फसल)",
+            "months": "March - June",
+            "crops": [
+                "Watermelon",
+                "Muskmelon",
+                "Cucumber",
+                "Moong",
+                "Sunflower"
+            ],
+            "tips": [
+                {
+                    "tip": "Tarbooz ki buvai February end ya March start mein karein — acchi dhoop zaruri hai",
+                    "crop": "Watermelon",
+                    "month": "February-March"
+                },
+                {
+                    "tip": "Moong dalhan mein sulphur ki kami se phool kam aate hain — buvai ke samay sulphur dalein",
+                    "crop": "Moong",
+                    "month": "March-April"
+                }
+            ]
+        }
+    },
+    "general_tips": [
+        {
+            "topic": "Soil Testing",
+            "tip_hindi": "Har 2 saal mein mitti ki jaanch karwaayein. Soil Health Card Scheme mein free hoti hai.",
+            "tip_english": "Get soil tested every 2 years. Free under Soil Health Card Scheme."
+        },
+        {
+            "topic": "Water Management",
+            "tip_hindi": "Boond-boond sinchai (drip irrigation) se 60% paani bachta hai aur fasal bhi acchi hoti hai.",
+            "tip_english": "Drip irrigation saves 60% water and improves crop yield."
+        },
+        {
+            "topic": "Organic Farming",
+            "tip_hindi": "Gobar ki khaad aur vermicompost daalein — chemical khad se zameen kharab hoti hai.",
+            "tip_english": "Use cow dung and vermicompost — chemical fertilizers degrade soil over time."
+        },
+        {
+            "topic": "Pest Control",
+            "tip_hindi": "Neem ka tel sabse accha organic keetnashak hai. 5ml neem tel + 1 litre paani mein milaakar spray karein.",
+            "tip_english": "Neem oil is the best organic pesticide. Mix 5ml neem oil in 1 litre water and spray."
+        },
+        {
+            "topic": "Crop Insurance",
+            "tip_hindi": "PM Fasal Bima Yojana mein fasal ka insurance karwaayein — bahut sasta hai aur nuksan ka paisa milta hai.",
+            "tip_english": "Insure crops under PM Fasal Bima Yojana — cheap premiums and covers natural disasters."
+        }
+    ]
+}

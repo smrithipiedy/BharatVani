@@ -1,0 +1,52 @@
+{
+    "id": "mudra_yojana",
+    "name": "PM MUDRA Yojana",
+    "full_name": "Pradhan Mantri Micro Units Development and Refinance Agency",
+    "hindi_name": "प्रधानमंत्री मुद्रा योजना",
+    "category": "business",
+    "benefit": "Collateral-free loans up to ₹10 lakh for small businesses",
+    "benefit_hindi": "Chhote karobaar ke liye bina guarantee ke ₹10 lakh tak loan",
+    "eligibility": {
+        "description": "Any Indian citizen with a business plan for non-farming income-generating activity",
+        "description_hindi": "Koi bhi Bharatiya naagrik jo chhota business shuru karna chahta hai ya badhana chahta hai",
+        "criteria": [
+            "Indian citizen with business plan",
+            "Non-farm business activities only",
+            "New or existing micro/small enterprises",
+            "Three categories: Shishu (up to ₹50,000), Kishore (₹50,001-₹5 lakh), Tarun (₹5-10 lakh)"
+        ],
+        "exclusions": [
+            "Agricultural activities (use Kisan Credit Card instead)",
+            "Large businesses"
+        ]
+    },
+    "documents_required": [
+        "Aadhaar Card",
+        "PAN card (for loans above ₹2 lakh)",
+        "Business plan or proposal",
+        "Address proof",
+        "Passport size photos",
+        "Business registration (if existing business)"
+    ],
+    "how_to_apply": {
+        "steps": [
+            "Visit any bank, NBFC, or MFI",
+            "Ask for MUDRA loan application",
+            "Choose category: Shishu/Kishore/Tarun",
+            "Submit business plan and documents",
+            "No collateral/guarantee needed",
+            "Loan sanctioned within 7-10 days"
+        ],
+        "steps_hindi": [
+            "Kisi bhi bank mein jaayein",
+            "MUDRA loan ka form maangein",
+            "Category chunein: Shishu (50 hazaar tak), Kishore (5 lakh tak), Tarun (10 lakh tak)",
+            "Business plan aur documents dein",
+            "Koi guarantee ya zabta nahi chahiye",
+            "7-10 din mein loan mil jaata hai"
+        ]
+    },
+    "helpline": "1800-180-1111",
+    "website": "mudra.org.in",
+    "hindi_summary": "MUDRA Yojana mein chhota business shuru karne ke liye bina guarantee ke loan milta hai. Teen category hain — Shishu: 50 hazaar tak, Kishore: 5 lakh tak, Tarun: 10 lakh tak. Kisi bhi bank mein jaake apply kar sakte hain. Koi zameen ya sona girvi nahi rakhna padta."
+}

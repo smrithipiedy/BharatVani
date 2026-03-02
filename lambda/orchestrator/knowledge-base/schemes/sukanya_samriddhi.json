@@ -1,0 +1,51 @@
+{
+    "id": "sukanya_samriddhi",
+    "name": "Sukanya Samriddhi Yojana",
+    "full_name": "Sukanya Samriddhi Yojana",
+    "hindi_name": "सुकन्या समृद्धि योजना",
+    "category": "savings",
+    "benefit": "High interest savings account (8.2% p.a.) for girl child, tax-free maturity",
+    "benefit_hindi": "Beti ke naam 8.2% byaaj wala savings account jo tax-free hai",
+    "eligibility": {
+        "description": "Girl child below 10 years of age",
+        "description_hindi": "10 saal se chhoti beti ke liye",
+        "criteria": [
+            "Girl child must be below 10 years of age",
+            "Maximum 2 accounts per family (one per girl child)",
+            "Parent or legal guardian can open account",
+            "Minimum deposit: ₹250 per year, Maximum: ₹1,50,000 per year"
+        ],
+        "exclusions": [
+            "Girl child above 10 years",
+            "More than 2 girl children (exception for twins/triplets)",
+            "NRI girls"
+        ]
+    },
+    "documents_required": [
+        "Birth certificate of girl child",
+        "Parent/guardian's Aadhaar card",
+        "Parent/guardian's address proof",
+        "Passport size photos"
+    ],
+    "how_to_apply": {
+        "steps": [
+            "Visit nearest Post Office or authorized bank",
+            "Fill SSY account opening form",
+            "Submit birth certificate and parent Aadhaar",
+            "Deposit minimum ₹250",
+            "Account opened — deposit yearly for 15 years",
+            "Maturity at girl's age of 21 years"
+        ],
+        "steps_hindi": [
+            "Nearest Post Office ya bank jaayein",
+            "SSY form bharein",
+            "Beti ka birth certificate aur parent ka Aadhaar dein",
+            "Kam se kam ₹250 jamaa karein",
+            "Account khul jayega — 15 saal tak har saal paisa daalein",
+            "Beti ke 21 saal hone par poora paisa milega"
+        ]
+    },
+    "helpline": "1800-266-6868 (post office)",
+    "website": "nsiindia.gov.in",
+    "hindi_summary": "Sukanya Samriddhi Yojana mein beti ke naam account khol sakte hain. Isme 8.2% byaaj milta hai jo bahut accha hai. Saal mein kam se kam 250 rupaye daalein. Beti ke 21 saal hone par poora paisa tax-free milega. Post Office ya bank mein account khulta hai."
+}

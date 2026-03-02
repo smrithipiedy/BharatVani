@@ -1,0 +1,48 @@
+{
+    "id": "fasal_bima_yojana",
+    "name": "PM Fasal Bima Yojana",
+    "full_name": "Pradhan Mantri Fasal Bima Yojana",
+    "hindi_name": "प्रधानमंत्री फसल बीमा योजना",
+    "category": "agriculture",
+    "benefit": "Crop insurance at very low premium — Kharif: 2%, Rabi: 1.5%, Commercial: 5% of sum insured",
+    "benefit_hindi": "Fasal bima bahut sasti dar par — Kharif: 2%, Rabi: 1.5%, naqdi faslon ke liye: 5%",
+    "eligibility": {
+        "description": "All farmers growing notified crops in notified areas",
+        "description_hindi": "Notified fasal ugaane waale sabhi kisan (apni ya kirade ki zameen par)",
+        "criteria": [
+            "Farmers growing notified crops in notified areas",
+            "Both landowner and tenant/sharecropper farmers eligible",
+            "Voluntary for non-loanee farmers",
+            "Mandatory for loanee farmers (those with crop loans)"
+        ],
+        "exclusions": []
+    },
+    "documents_required": [
+        "Aadhaar Card",
+        "Bank account details",
+        "Land records (Khasra/Khatauni)",
+        "Sowing certificate from Patwari/Agriculture officer",
+        "Crop loss claim: photos and panchnama from revenue department"
+    ],
+    "how_to_apply": {
+        "steps": [
+            "Visit bank where crop loan is taken",
+            "Or visit nearest CSC center",
+            "Or apply online at pmfby.gov.in",
+            "Submit land records and sowing certificate",
+            "Pay premium (2% for Kharif, 1.5% for Rabi)",
+            "In case of crop loss: inform insurance company within 72 hours"
+        ],
+        "steps_hindi": [
+            "Jis bank se loan lia hai wahaan jaayein",
+            "Ya CSC center mein apply karein",
+            "Ya pmfby.gov.in par online karein",
+            "Zameen ke papers aur buvai certificate dein",
+            "Premium bhugtan karein (Kharif: 2%, Rabi: 1.5%)",
+            "Fasal kharab ho toh 72 ghante mein insurance company ko bataayein"
+        ]
+    },
+    "helpline": "1800-200-7710",
+    "website": "pmfby.gov.in",
+    "hindi_summary": "Fasal Bima Yojana mein fasal ka insurance hota hai bahut saste mein. Kharif fasal ke liye sirf 2% aur Rabi ke liye 1.5% premium lagta hai. Agar baad, sukha, ya bimari se fasal kharab ho toh nuksan ka paisa milta hai. Bank ya CSC mein apply karein."
+}
